@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>bebelle & nandinha — nosso conto</title>
+
+  <style>
+    :root{
+      --bg1:#0f0720;
+      --bg2:#062214;
+      --card1:#1b0f33cc;
+      --card2:#0b281bcc;
+      --purple1:#b36bff;
+      --purple2:#7c3aed;
+      --green1:#38f089;
+      --green2:#22c55e;
+      --text:#f7f5ff;
+      --muted:#d8d2ff;
+      --line:rgba(255,255,255,.08);
+      --shadow:rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 10%, rgba(179,107,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 90% 90%, rgba(34,197,94,.18), transparent 60%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+    }
+
+    header{
+      padding:66px 18px 28px;
+      text-align:center;
+    }
+
+    .title{
+      font-size:2.35rem;
+      margin:0;
+      line-height:1.1;
+      letter-spacing:.3px;
+      background:linear-gradient(135deg,var(--purple1),var(--green1));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .subtitle{
+      margin:14px auto 0;
+      max-width:860px;
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.6;
+    }
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:18px 18px 70px;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--card1),var(--card2));
+      border-radius:24px;
+      padding:26px 22px;
+      box-shadow:0 20px 50px var(--shadow);
+      margin:18px 0 22px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 200px at 10% 0%, rgba(179,107,255,.16), transparent 55%),
+        radial-gradient(700px 200px at 90% 0%, rgba(34,197,94,.14), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .card > *{position:relative}
+
+    h2{
+      margin:0 0 10px;
+      font-size:1.35rem;
+      color:var(--green1);
+      letter-spacing:.2px;
+    }
+
+    .chapter-meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:0 0 14px;
+      color:rgba(255,255,255,.75);
+      font-size:.92rem;
+    }
+
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      padding:7px 10px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+    }
+
+    p{
+      margin:0 0 12px;
+      line-height:1.85;
+      font-size:1.02rem;
+      color:#efeaff;
+    }
+
+    .quote{
+      margin-top:12px;
+      padding:14px 14px;
+      border-left:3px solid rgba(179,107,255,.7);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      color:#f7f5ff;
+    }
+
+    .counter{
+      text-align:center;
+    }
+
+    .counter .big{
+      font-size:1.55rem;
+      margin-top:6px;
+      font-weight:700;
+      letter-spacing:.3px;
+      background:linear-gradient(135deg,var(--purple1),var(--green1));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .counter .small{
+      color:var(--muted);
+      margin-top:6px;
+      font-size:.98rem;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:12px;
+    }
+
+    .btn{
+      border:0;
+      cursor:pointer;
+      padding:13px 18px;
+      border-radius:999px;
+      font-weight:700;
+      text-decoration:none;
+      color:#08130c;
+      background:linear-gradient(135deg,var(--purple1),var(--green1));
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      transition:transform .12s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .btn:active{transform:scale(.98)}
+
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
+      color:#f7f5ff;
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .photo{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      min-height:220px;
+    }
+
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.02);
+    }
+
+    .photo .cap{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:10px 12px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+      color:#fff;
+      font-size:.92rem;
+      letter-spacing:.2px;
+    }
+
+    footer{
+      text-align:center;
+      color:rgba(255,255,255,.72);
+      padding:22px 10px 0;
+      font-size:.92rem;
+    }
+
+    .heart{
+      display:inline-block;
+      transform:translateY(1px);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1 class="title">bebelle & nandinha 💜💚</h1>
+  <p class="subtitle">
+    isso aqui não é só um site. é o meu jeito de guardar a gente num lugar que dá pra abrir sempre que a saudade bater
+    — e lembrar que, mesmo quando o mundo muda, o nosso “nós” continua sendo casa.
+  </p>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>prólogo — antes de virar “nós”</h2>
+    <div class="chapter-meta">
+      <span class="pill">📚 escola</span>
+      <span class="pill">🫶 aproximação</span>
+      <span class="pill">✨ destino calmo</span>
+    </div>
+    <p>
+      tem amores que chegam fazendo barulho. e tem amores que chegam como quem senta do teu lado, de leve,
+      e começa a encaixar tudo por dentro. foi assim com a gente.
+    </p>
+    <p>
+      na escola, no meio de tanta gente, tanta rotina, tanta coisa acontecendo, eu fui percebendo que a tua presença
+      tinha um peso diferente. não era sobre “olhar e achar bonito” — era sobre olhar e sentir paz. tipo quando o dia tá cheio,
+      mas alguém te dá um cantinho de calma só existindo perto.
+    </p>
+    <div class="quote">
+      eu não sei em que momento eu comecei a te procurar com os olhos, mas eu sei que, quando percebi, já era tarde:
+      você já era parte do meu dia.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>capítulo 1 — a escola</h2>
+    <div class="chapter-meta">
+      <span class="pill">👀 olhares</span>
+      <span class="pill">😄 risadas</span>
+      <span class="pill">🧡 cuidado</span>
+    </div>
+    <p>
+      a escola tinha aquele clima de sempre: gente passando, assunto correndo, prova chegando, vida acontecendo.
+      e, mesmo assim, quando era você… parecia que o barulho diminuía.
+    </p>
+    <p>
+      era um “oi” que ficava na cabeça por mais tempo. uma conversa que não acabava quando o sinal tocava.
+      uma vontade de ficar perto sem precisar de motivo.
+    </p>
+    <p>
+      e eu acho lindo que o nosso começo tenha sido assim: sem pressa, sem forçar nada, só deixando a gente se descobrir.
+      porque quando é de verdade, o coração não precisa correr — ele só reconhece.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>capítulo 2 — porto seguro</h2>
+    <div class="chapter-meta">
+      <span class="pill">🚌 formatura</span>
+      <span class="pill">🌊 porto seguro</span>
+      <span class="pill">🌙 noites longas</span>
+    </div>
+    <p>
+      e aí veio a viagem. e com ela, aquele tipo de proximidade que muda tudo.
+      porto seguro não foi só um lugar no mapa. foi o lugar onde o “a gente” ganhou coragem.
+    </p>
+    <p>
+      foi ali que eu senti que você não era só alguém que eu gostava — você era alguém que eu queria escolher.
+      entre uma risada e outra, entre momentos simples e aqueles instantes em que o silêncio fala sozinho…
+      eu fui ficando com vontade de te cuidar como quem protege um tesouro.
+    </p>
+    <p>
+      e é engraçado, né? porque tinha mil coisas pra olhar, mil paisagens, mil distrações… mas eu só lembrava de você.
+      da tua mão perto da minha. do teu jeito. da sensação de “eu tô onde eu devia estar”.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>capítulo 3 — 28/09</h2>
+    <div class="chapter-meta">
+      <span class="pill">💋 primeira vez</span>
+      <span class="pill">🫀 coração</span>
+      <span class="pill">📅 28/09</span>
+    </div>
+    <p>
+      o dia 28/09 não é só uma data. é um marco.
+      é o dia em que o mundo ficou pequeno o suficiente pra caber num beijo.
+    </p>
+    <p>
+      aquele beijo tinha coisa demais dentro: nervoso, certeza, desejo de ficar, vontade de repetir.
+      e, principalmente, tinha verdade. parecia que a gente tinha esperado exatamente o tempo certo.
+    </p>
+    <p>
+      eu lembro da sensação depois… como se eu tivesse colocado o pé num caminho que não dava mais pra voltar,
+      e nem queria. porque era bom. porque era você.
+    </p>
+    <div class="quote">
+      se me perguntarem quando eu soube, eu digo: eu soube quando eu te beijei e pensei “é aqui”.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>capítulo 4 — 15/01</h2>
+    <div class="chapter-meta">
+      <span class="pill">💍 namoro</span>
+      <span class="pill">📅 15/01</span>
+      <span class="pill">🧩 nós</span>
+    </div>
+    <p>
+      e então chegou 15/01. o dia em que a gente disse em voz alta aquilo que o corpo já sabia:
+      agora é nós.
+    </p>
+    <p>
+      não foi só “começar a namorar”. foi escolher construir.
+      foi dizer “eu quero você do meu lado” com a coragem de quem não quer viver pela metade.
+    </p>
+    <p>
+      desde então, eu aprendi que amar você é uma coisa viva:
+      tem dia leve, tem dia difícil, tem saudade, tem abraço, tem risada do nada…
+      mas sempre tem um ponto fixo: eu quero você.
+    </p>
+  </div>
+
+  <div class="card counter">
+    <h2>juntas há <span class="heart">💜💚</span></h2>
+    <div class="big" id="contador">carregando…</div>
+    <div class="small">desde 15/01 — e eu ainda me apaixono de novo toda hora</div>
+  </div>
+
+  <div class="card">
+    <h2>nossas fotos 📸</h2>
+    <p style="color:var(--muted); margin-top:-4px">
+      cada foto é um pedacinho da gente que eu queria guardar pra sempre.
+    </p>
+    <div class="gallery" id="galeria"></div>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <h2>nossa música 🎶</h2>
+    <p style="color:var(--muted); margin-top:-4px">
+      pra não ter risco de abrir a errada, esses botões abrem a <b>iris</b> pela busca oficial.
+    </p>
+    <div class="actions">
+      <a class="btn" target="_blank"
+         href="https://open.spotify.com/search/iris%20goo%20goo%20dolls">
+        💜 spotify: iris
+      </a>
+      <a class="btn secondary" target="_blank"
+         href="https://www.youtube.com/results?search_query=Iris+Goo+Goo+Dolls+Official">
+        💚 youtube: iris
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>epílogo — eu escolheria você de novo</h2>
+    <p>
+      bebelle e nandinha… eu não sei como o futuro vai se desenhar nos detalhes,
+      mas eu sei de uma coisa com uma certeza que não treme: eu quero você nele.
+    </p>
+    <p>
+      quero os nossos planos pequenos (os mais lindos) — um dia comum que vira especial só porque você tá.
+      quero o nosso jeito de rir, de se olhar, de se entender até quando a gente não fala.
+      quero a nossa calma depois da correria. quero a gente.
+    </p>
+    <div class="quote">
+      e se um dia você duvidar do tamanho do meu amor, volta aqui. abre esse site.
+      e lembra: eu fiz tudo isso só pra te lembrar que você é meu lugar preferido.
+    </div>
+  </div>
+
+  <footer>
+    feito com amor, por bebelle, pra nandinha. sempre. 💜💚
+  </footer>
+
+</div>
+
+<script>
+  // ===== CONTADOR (ajuste o ano se precisar) =====
+  // se vocês começaram a namorar em 15/01/2025, deixa assim.
+  // se foi 15/01/2024, troque "2025" por "2024".
+  const inicio = new Date("2025-01-15T00:00:00");
+
+  function atualizarContador(){
+    const agora = new Date();
+    let diff = agora - inicio;
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff %= (1000 * 60 * 60 * 24);
+    const horas = Math.floor(diff / (1000 * 60 * 60));
+    diff %= (1000 * 60 * 60);
+    const minutos = Math.floor(diff / (1000 * 60));
+    diff %= (1000 * 60);
+    const segundos = Math.floor(diff / 1000);
+
+    const el = document.getElementById("contador");
+    el.textContent = `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+  }
+
+  setInterval(atualizarContador, 1000);
+  atualizarContador();
+
+  // ===== GALERIA (tenta várias extensões automaticamente) =====
+  // coloque aqui as "bases" dos nomes (sem extensão) e o script tenta .jpeg, .jpg, .png, .PNG
+  const bases = [
+    "0A3FC746-F61F-439E-A65A-514A9DE769EE",
+    "2607CDEA-4365-4BA2-878C-44C7E3336F8B",
+    "A26D8DBD-2A21-4148-AE93-2772E0605D94",
+    "B0D61AA4-D651-456D-8163-7ED5ED5E6F4F",
+    "CA783135-CB7A-4523-ABA0-A05014782B7F",
+    "CE16D8C7-2A36-4764-B694-5E05B41B32EE",
+    "D0650CC1-41C7-44C0-BF20-FECCCD617485",
+    "E0A4E68A-2381-418C-A1BC-FEE442B1A767",
+    "F779550B-E61A-4EC7-9B7F-3C1843457737"
+  ];
+
+  const exts = [".jpeg", ".jpg", ".png", ".PNG", ".JPG", ".JPEG"];
+
+  function criarFoto(base, index){
+    const wrap = document.createElement("div");
+    wrap.className = "photo";
+
+    const img = document.createElement("img");
+    img.alt = "bebelle e nandinha — foto " + (index+1);
+
+    const cap = document.createElement("div");
+    cap.className = "cap";
+    cap.textContent = "bebelle e nandinha — foto " + (index+1);
+
+    let tentativa = 0;
+    function tentar(){
+      if (tentativa >= exts.length){
+        // se falhar tudo, esconde o bloco (pra não aparecer “quebrado”)
+        wrap.style.display = "none";
+        return;
+      }
+      img.src = base + exts[tentativa];
+      tentativa++;
+    }
+
+    img.onerror = tentar;
+    tentar();
+
+    wrap.appendChild(img);
+    wrap.appendChild(cap);
+    return wrap;
+  }
+
+  const galeria = document.getElementById("galeria");
+  bases.forEach((b,i)=> galeria.appendChild(criarFoto(b,i)));
+</script>
+
+</body>
+</html>
+
+<div class="gallery">
+  <img src="0A3FC746-F61F-439E-A65A-514A9DE769EE.jpeg" alt="bebelle e nandinha">
+  <img src="2607CDEA-4365-4BA2-878C-44C7E3336F8B.jpeg" alt="bebelle e nandinha">
+  <img src="A26D8DBD-2A21-4148-AE93-2772E0605D94.jpeg" alt="bebelle e nandinha">
+  <img src="B0D61AA4-D651-456D-8163-7ED5ED5E6F4F.jpeg" alt="bebelle e nandinha">
+  <img src="CA783135-CB7A-4523-ABA0-A05014782B7F.jpeg" alt="bebelle e nandinha">
+  <img src="CE16D8C7-2A36-4764-B694-5E05B41B32EE.jpeg" alt="bebelle e nandinha">
+  <img src="D0650CC1-41C7-44C0-BF20-FECCCD617485.jpeg" alt="bebelle e nandinha">
+  <img src="E0A4E68A-2381-418C-A1BC-FEE442B1A767.jpeg" alt="bebelle e nandinha">
+  <img src="F779550B-E61A-4EC7-9B7F-3C1843457737.jpeg" alt="bebelle e nandinha">
+</div>
